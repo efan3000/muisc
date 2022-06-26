@@ -15,6 +15,9 @@ This repo includes the inference code for MUIsC, the main module of our AGPIS (A
 - The main code is at ```./muisc_inference.py```. You can find input data processing code in function ```build_data```; model loading code in function ```load_model``` (instantiation of language tower and image tower and their interaction are also here); and inferece code is in function ```inference```.  
 - ```muisc_model.py``` contains data iterator and image-tower modeling. 
 - The model checkpoint is not available for some reason, sorry.
+- Main changes in huggingface transformers:
+  - Make GPT2 suport optional cross-attention.
+  - Fixed a bug in GPT2DoubleHeadsModel's classification head
 
 ## Update
 - Performance could be futher impoved if
