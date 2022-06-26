@@ -24,30 +24,16 @@ from transformers import (
     AutoTokenizer,
     DataCollatorForLanguageModeling,
     HfArgumentParser,
-    #Trainer,
-    #TrainingArguments,
-    #set_seed,
-    #GPT2LMHeadModel,
     BertLayer,
-    #GPT2Block,
     GPT2DoubleHeadsModel,
     ViTModel,
     ViTFeatureExtractor,
 )
-#from transformers import AdamW, get_linear_schedule_with_warmup, BertTokenizer, ViTFeatureExtractor
-#from transformers.trainer_utils import get_last_checkpoint
 from transformers.utils import check_min_version
 from transformers.utils.versions import require_version
 import argparse
 
-#from pytorch_lightning.callbacks import ModelCheckpoint, LearningRateMonitor
-#import pytorch_lightning as pl
-#import random
 from PIL import Image
-#import pickle
-#import copy
-#from sklearn.metrics import average_precision_score, roc_auc_score
-#from tqdm import tqdm
 
 
 import os
@@ -151,8 +137,6 @@ class ImageEncoderModel(nn.Module):
 
 
         self.use_image_cross = True
-        #self.use_cat_in_image_cross = False
-        #self.binglian = False
         self.pos_num = pos_num
 
         if self.use_image_cross is True:
@@ -186,7 +170,6 @@ class ImageEncoderModel(nn.Module):
         if image_data is None:
             return None
         else:
-            #print('1. xc====== image_data.device = {}'.format(image_data['pixel_values'].device))
             input = image_data
             if device is not None:
                 input['pixel_values'] = input['pixel_values'].to(device)
@@ -204,16 +187,13 @@ class ImageEncoderModel(nn.Module):
 
             outputs = self.image_tower(**input)
             x = outputs.last_hidden_state
-            #print("xc====== ImageEncoderModel: x = {}, {}".format(x.shape, x[0,0,:10]))
 
             if self.use_image_cross == True:
                 position_embeds = self.wpe(self.position_ids.to(input['pixel_values'].device))
                 xx = x.view((batch_size, -1, x.shape[-1]))
-                #print('xc====== ImageEncoderModel: 2.5. xx = {}'.format(x.shape))
                 x = self.self(xx + position_embeds,  attention_mask=None)[0]
 
             x = x.view((batch_size, 1, -1, x.shape[-1]))
-            #print('xc====== ImageEncoderModel: 3. x = {}'.format(x.shape))
 
             return x
 
