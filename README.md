@@ -1,4 +1,4 @@
-# Unified Image-sequence Classifier (MUIsC)
+# Multi-modality Unified Image-sequence Classifier (MUIsC)
 Paper: **Automatic Generation of Product-Image Sequence in E-commerce**
 <br>
 In KDD 2022 ADS 
