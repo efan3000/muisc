@@ -4,7 +4,7 @@ Paper: **Automatic Generation of Product-Image Sequence in E-commerce**
 In KDD 2022 ADS 
 <br>
 
-This repo includes the inference code for MUIsC, the main module of our AGPIS (Automatic Generation of Product-Image Sequence) framework for JD.com.
+This repo includes the inference code for MUIsC, a main module of our AGPIS (Automatic Generation of Product-Image Sequence) framework for JD.com.
 
 ## Environment setup
 - ```conda create -n agpis python=3.6 ```
